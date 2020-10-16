@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 global.url = 'mongodb://localhost:27017/capp';
 global.secretOrKey = "admin";
 // Connecting to the database
-mongoose.connect(url, {
+mongoose.connect(process.env.MONGODB_URI || url, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");
