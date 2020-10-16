@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 global.app = express();
 global.moment = require('moment');
@@ -15,7 +17,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// app.use(fileUpload());
+app.use(fileUpload());
 
 global.connectPool = require('./config/db.js');
 
@@ -61,7 +63,9 @@ app.use('/', webRouter);
 
 var apiRouter = require('./routes/api');
 app.use('/api', apiRouter);
-var server = app.listen(9800, function () {
+
+const port = process.env.PORT || 9800;
+var server = app.listen(port, function () {
     console.log("Example app listening at http://127.0.0.1:%s", server.address().port);
 });
 process.on('uncaughtException', function (err) {
