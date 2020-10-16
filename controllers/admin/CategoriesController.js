@@ -31,7 +31,6 @@ async function list(req, res) {
 exports.list = list;
 
 async function listapi(req, res) {
-
     const allRecord = await Categories.find({});
     res.status(200).send({
       message: "All Categories Found successfully ",

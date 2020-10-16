@@ -44,7 +44,8 @@ const RegisterController = module.exports = {
       //Sending a promise if user exists or not
       User.findOne({ email: req.body.email }).then(user => {
         if (user) {
-          var errors = "User already exists";
+          var errors = {};
+          errors.error = "User already exists";
           return res.status(400).json(errors); // sending error status code
         } else {
           //Used gravatar for providing unique avatar to all users
@@ -56,13 +57,9 @@ const RegisterController = module.exports = {
           });
 
           const newUser = new User({
-            first_name: req.body.first_name,
+            name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            first_name : req.body.first_name,
-            last_name : req.body.last_name,
-            email : req.body.email,
-            password : req.body.password,
             profile_pic : avatar,
             contact_number : req.body.phone,
             role_id  : 0
