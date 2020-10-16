@@ -15,7 +15,12 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(fileUpload());
+// app.use(fileUpload({
+//   limits: { fileSize: 50 * 1024 * 1024 },
+//   useTempFiles : true,
+//     tempFileDir : '/tmp/'
+// }));
+var path=require('path');
 
 global.connectPool = require('./config/db.js');
 
@@ -52,6 +57,7 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(express.urlencoded({limit: '100mb',extended: true }));
+
 
 var webRouter = require('./routes/web');
 app.use('/', webRouter);
