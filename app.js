@@ -15,7 +15,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// app.use(fileUpload());
+app.use(fileUpload());
 
 global.connectPool = require('./config/db.js');
 

@@ -15,10 +15,11 @@ router.post('/v1/login', AuthController.login);
 router.post('/v1/register', RegisterController.store);
 router.post('/v1/upload-video', Home.display_videos);
 router.get('/v1/get-categories', Categories.listapi);
+// router.get('/v1/playCatVideo/:name', Filecontroller.serverFunction);
 
 // TODO: NEED TO UPLOAD FILE USING HTTP REQUEST
 router.post("/v1/upload", upload.single('file'), Filecontroller.upload);
-router.get("/v1/files", Filecontroller.getListFiles);
+router.get("/v1/active_videos", Filecontroller.getListFiles);
 router.get("/v1/files/:name", Filecontroller.download);
 
 

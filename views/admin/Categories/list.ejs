@@ -33,6 +33,8 @@
                                             <tr>
                                                 <th>S.NO.</th>
                                                 <th>Name</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
                                                 <th class="hidden-480">Created Date</th>
                                                 <th> <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> Status </th>
                                                 <th class="hidden-480">Action</th>
@@ -46,6 +48,8 @@
                                             <tr>
                                                 <td> <a href="#"><%=i+1%></a>  </td>
                                                 <td style="width: 15%;"><%=data[i].name%></td>
+                                                <td style="width: 15%;"><%=data[i].start_time%></td>
+                                                <td style="width: 15%;"><%=data[i].end_time%></td>
                                                 <td><%=moment(data[i].created_at).format('YYYY-MM-DD hh:mm:ss')%></td>
                                                 <td class="hidden-480">
                                                     <%if(data[i].is_active == 1){  %>
