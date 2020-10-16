@@ -1,21 +1,18 @@
-const util = require("util");
 const multer = require("multer");
-const maxSize = 8 * 1024 * 1024;
+
+const VIDEO_UPLOAD_BASE_URL = __basedir + "/uploads/videos/";
 
 let storage = multer.diskStorage({
-  destination: (req, files, cb) => {
-    cb(null, __basedir + "/resources/static/assets/uploads/");
+  destination: (req, file, cb) => {
+    cb(null, VIDEO_UPLOAD_BASE_URL);
   },
-  filename: (req, files, cb) => {
-    console.log(files.originalname);
-    cb(null, files.originalname);
-  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  }
 });
 
-let uploadFile = multer({
+const upload = multer({
   storage: storage,
-  limits: { fileSize: maxSize },
-}).single("file");
-console.log();
-let uploadFileMiddleware = util.promisify(uploadFile);
-module.exports = uploadFileMiddleware;
+});
+
+module.exports = upload;

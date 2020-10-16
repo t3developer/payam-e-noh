@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const upload = require("../middleware/upload");
 const AuthController  = require('../controllers/auth/AuthController');
 const RegisterController  = require('../controllers/auth/RegisterController');
 const Categories   = require('../controllers/admin/CategoriesController');
@@ -16,7 +17,7 @@ router.post('/v1/upload-video', Home.display_videos);
 router.get('/v1/get-categories', Categories.listapi);
 
 // TODO: NEED TO UPLOAD FILE USING HTTP REQUEST
-router.post("/v1/upload", Filecontroller.upload);
+router.post("/v1/upload", upload.single('file'), Filecontroller.upload);
 router.get("/v1/files", Filecontroller.getListFiles);
 router.get("/v1/files/:name", Filecontroller.download);
 

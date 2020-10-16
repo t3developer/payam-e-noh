@@ -1,31 +1,39 @@
-const uploadFile = require("../middleware/upload");
 const Videos = require('../models/Videos');
 
 const upload = async (req, res) => {
-  try {
-    await uploadFile(req, res);
-    console.log(req.files);
-    if (req.files == undefined) {
-      return res.status(400).send({ message: "Please upload a file!" });
-    }
-    var input = {};
-    input.name = req.files.file.name;
-    input.user_id = req.body.user_id,
-    // input.path =
-    input.is_active  = 0;
-    const SaveData = new Videos(input);
-    var saveResult=   await SaveData.save();
+    try {
+      console.log(req.file);
 
-    if (saveResult) {
-      res.status(200).send({
-        message: "Uploaded the file successfully: " + saveResult,
+      if (req.file === undefined) {
+        return res.status(400).send({
+          error: "Please upload a file!"
+        });
+      }
+
+      let video = {};
+      video.name = req.file.filename;
+      video.user_id = req.body.user_id;
+      video.category_id = req.body.category_id;
+      video.path = req.file.path;
+      video.is_active  = 0;
+      const videoRecord = new Videos(video);
+      const saveResult = await videoRecord.save();
+
+      if (saveResult) {
+        res.status(200).send({
+          success: "Uploaded the file successfully: " + saveResult,
+        });
+      } else {
+        res.send(400).send({
+          error: "File uploading failed. Server error!"
+        });
+      }
+
+    }catch(err) {
+      res.send(400).send({
+        error: "File uploading failed. Server error!"
       });
     }
-  } catch (err) {
-    res.status(500).send({
-      message: `Could not upload the file: ${req.files.file.name}. ${err}`,
-    });
-  }
 };
 
 const getListFiles = (req, res) => {

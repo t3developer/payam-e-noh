@@ -3,6 +3,7 @@ const VideoSchema = mongoose.Schema({
     name : String,
     path : String,
     user_id : String,
+    category_id : String,
     is_active  : String,
     created_at   : String,
     updated_at  : String,

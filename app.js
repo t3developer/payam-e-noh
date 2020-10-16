@@ -15,7 +15,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(fileUpload());
+// app.use(fileUpload());
 
 global.connectPool = require('./config/db.js');
 
@@ -37,6 +37,7 @@ app.set('view engine', 'ejs');
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname +'/public'));
+app.use(express.static(__dirname +'/uploads'));
 var flash = require('express-flash-messages')
 app.use(flash())
 
