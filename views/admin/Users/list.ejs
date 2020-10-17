@@ -32,7 +32,7 @@
                                         <thead>
                                             <tr> 
                                                 <th>S.NO.</th>
-                                                <th>First Name</th>
+                                                <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Mobile Number</th>
                                                 <th class="hidden-480">Created Date</th> 
@@ -47,7 +47,7 @@
                                                     for(var i = 0;i < data.length;i++) { %>
                                             <tr> 
                                                 <td> <a href="#"><%=i+1%></a>  </td>
-                                                <td style="width: 15%;"><%=data[i].first_name%></td> 
+                                                <td style="width: 15%;"><%=data[i].name%></td>
                                                 <td style="width: 15%;"><%=data[i].email%></td> 
                                                 <td style="width: 15%;"><%=data[i].contact_number%></td> 
                                                 <td><%=moment(data[i].created_at).format('YYYY-MM-DD hh:mm:ss')%></td>  
