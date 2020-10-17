@@ -28,8 +28,8 @@ global.connectPool = require('./config/db.js');
 // Constants
 //global.nodeSiteUrl = 'http://192.168.1.151/constructionApp/nodeApi/'; // node
 global.__basedir = __dirname;
-global.nodeSiteUrl = 'http://127.0.0.1:9800'; // node
-global.nodeAdminUrl = 'http://127.0.0.1:9800/admin'; // node
+global.nodeSiteUrl = process.env.SERVER_URL || 'http://127.0.0.1:9800'; // node
+global.nodeAdminUrl = global.nodeSiteUrl + '/admin'; // node
 global.siteTitle = 'Payam-e-Noh Admin';
 global.successStatus = 200;
 global.failStatus = 401;
@@ -65,7 +65,7 @@ app.use('/api', apiRouter);
 
 const port = process.env.PORT || 9800;
 var server = app.listen(port, function () {
-    console.log("Example app listening at http://127.0.0.1:%s", server.address().port);
+    console.log("Example app listening at http://127.0.0.1:%s", port);
 });
 process.on('uncaughtException', function (err) {
     console.log('Caught exception: ' + err);
