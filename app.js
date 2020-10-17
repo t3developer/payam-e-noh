@@ -10,15 +10,15 @@ const bodyParser = require('body-parser');
 
 // Required module
 app.use(expressValidator());
-var corsOptions = {
-    origin: "*",
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'x-reset-token', 'x-invite-token', 'x-api-key', 'x-www-form-urlencoded'],
-    credentials: true
-};
+// var corsOptions = {
+//     origin: "*",
+//     allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'x-reset-token', 'x-invite-token', 'x-api-key', 'x-www-form-urlencoded'],
+//     credentials: true
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload({
     createParentPath: true
 }));
@@ -42,20 +42,22 @@ app.set('view engine', 'ejs');
 //app.set('view engine', 'pug')
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
+
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname +'/public'));
+
 var flash = require('express-flash-messages')
 app.use(flash())
 
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 app.use(cookieParser());
-app.use(expressSession({secret: 'D%$*&^lk32', resave: false,saveUninitialized: true}));
+app.use(expressSession({secret: 'D%$*&^lk32', resave: false, saveUninitialized: true}));
 
-app.use(function (req, res, next) {
-    res.header('Content-Type', 'application/json');
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.header('Content-Type', 'application/json');
+//     next();
+// });
 
 var webRouter = require('./routes/web');
 app.use('/', webRouter);
