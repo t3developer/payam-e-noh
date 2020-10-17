@@ -43,8 +43,8 @@ app.set('view engine', 'ejs');
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 
-// app.use('/uploads', express.static(__dirname + '/uploads'));
-// app.use(express.static(__dirname +'/public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname +'/public'));
 
 var flash = require('express-flash-messages')
 app.use(flash())
@@ -67,9 +67,9 @@ app.use('/api', apiRouter);
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
-    app.use(express.static(path.join(__dirname, '/uploads')));
+    app.use(express.static(path.join(__dirname, 'uploads')));
     app.use(express.static(path.join(__dirname, 'client/build')));
-    app.use(express.static(path.join(__dirname, '/public')));
+    app.use(express.static(path.join(__dirname, 'public')));
     // Handle React routing, return all requests to React app
     app.get('/', function(req, res) {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
