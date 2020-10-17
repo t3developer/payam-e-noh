@@ -37,7 +37,17 @@
                                         <label for="form-field-select-1">Name</label>
                                         <input type="text" name="name" value="<%=data.name%>" id="form-field-select-1" placeholder="Name" class="form-control">
                                         <span class="error"><%=errorData.name%></span>
-                                    </div>  <br>     
+                                    </div>  <br>
+                                    <div>
+                                        <label for="form-field-select-1">Start Time</label>
+                                        <input type="time" id="start_time" name="start_time">
+                                        <span class="error"><%=errorData.start_time%></span>
+                                    </div>  <br>
+                                    <div>
+                                      <label for="form-field-select-1">Start Time</label>
+                                      <input type="time" id="end_time" name="end_time">
+                                      <span class="error"><%=errorData.end_time%></span>
+                                    </div>  <br>
                                     <div>
                                         <label for="form-field-select-2">Status</label>
                                         <select class="form-control" name="is_active" id="form-field-select-2">

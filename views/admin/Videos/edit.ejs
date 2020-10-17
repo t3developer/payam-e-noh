@@ -6,7 +6,7 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                     <ul class="breadcrumb">
                         <li> <i class="ace-icon fa fa-tachometer"></i> <a href="<%=nodeAdminUrl%>/Dashboard">Dashboard</a> </li>
-                        <li class="active"><a href="<%=nodeAdminUrl%>/<%=controller%>/list"> Users </a> </li>
+                        <li class="active"><a href="<%=nodeAdminUrl%>/<%=controller%>/list"> Videos </a> </li>
                         <li class="active">edit</li>
                     </ul><!-- /.breadcrumb -->
 
@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="">
-                            <form method="post" action="<%=nodeAdminUrl%>/<%=controller%>/edit/<%=data.id%>" enctype="multipart/form-data">
+                            <form method="post" action="<%=nodeAdminUrl%>/<%=controller%>/edit/<%=data.id%>">
                             <div class="widget-body">
                                 <input type="hidden" value="<%=data.id%>" name="id">
                                 <div class="widget-main">

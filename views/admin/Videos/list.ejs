@@ -32,8 +32,9 @@
                                         <thead>
                                             <tr>
                                                 <th>S.NO.</th>
-                                                <th>User Id</th>
-                                                <th>Video</th>
+                                                <th>User Name</th>
+                                                <th>File Name</th>
+                                                <th>File</th>
                                                 <th> <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> Status </th>
                                                 <th class="hidden-480">Action</th>
 
@@ -45,8 +46,15 @@
                                                     for(var i = 0;i < data.length;i++) { %>
                                             <tr>
                                                 <td> <a href="#"><%=i+1%></a>  </td>
-                                                <td style="width: 15%;"><%=data[i].id%></td>
-                                                <td style="width: 15%;"><%=data[i].video%></td>
+                                                <td style="width: 15%;"><%=data[i].user_id%></td>
+                                                <td style="width: 15%;"><%=data[i].name%></td>
+                                                <td style="width: 15%;">
+                                                  <video controls>
+                                                      <source src="<%=data[i].path%>" type="video/mp4"/>
+                                                      <!-- fallback -->
+                                                      Your browser does not support the <code>video</code> element.
+                                                  </video>
+                                                </td>
                                                 <td class="hidden-480">
                                                     <%if(data[i].is_active == 1){  %>
                                                     <span class="label label-sm label-success">Active</span>

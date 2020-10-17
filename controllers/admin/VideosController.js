@@ -46,7 +46,7 @@ async function edit(req, res) {
     var errorData = {};
     if(req.params.id){
         var id =  req.params.id;
-        const entityDetail = await Users.findById({_id:id});
+        const entityDetail = await Videos.findById({_id:id});
         if(entityDetail == 0){
             req.flash('error', 'Invalid url')
             return res.redirect(nodeAdminUrl+'/Videos/list');
@@ -54,10 +54,8 @@ async function edit(req, res) {
         if (req.method == "POST") {
             var input = JSON.parse(JSON.stringify(req.body));
 
-            console.log(input); console.log('Here');
-            req.checkBody('first_name', 'First name is required').notEmpty();
-            req.checkBody('last_name', 'Last name is required').notEmpty();
-            req.checkBody('contact_number', 'Mobile number is required').notEmpty();
+            console.log(req); console.log('Here');
+            req.checkBody('is_active', 'Status is required').notEmpty();
             var errors = req.validationErrors();
             if(errors){
                 if(errors.length > 0){
@@ -70,21 +68,6 @@ async function edit(req, res) {
                 }
             }else{
                 var saveResult = '';
-                // Upload Image
-                // if (req.files && req.files.profile_pic !== "undefined") {
-                //     let profile_pic = req.files.profile_pic;
-                //     var timestamp = new Date().getTime();
-                //     filename = timestamp+'-'+profile_pic.name;
-                //     input.profile_pic =   filename;
-                //     profile_pic.mv('public/upload/'+filename, function(err) {
-                //         if (err){
-                //             console.log(err);
-                //             req.flash('error', 'Could not upload image. Please try again!')
-                //             res.locals.message = req.flash();
-                //             return res.redirect(nodeAdminUrl+'/Videos/'+action);
-                //         }
-                //     });
-                // }
                 var msg =  controller+' updated successfully.';
                 var saveResult = await Videos.findByIdAndUpdate(req.params.id, {$set: input});
                 req.flash('success', msg)

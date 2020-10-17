@@ -17,6 +17,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+var path=require('path');
 app.use(fileUpload());
 
 global.connectPool = require('./config/db.js');
@@ -54,6 +55,7 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(express.urlencoded({limit: '100mb',extended: true }));
+
 
 var webRouter = require('./routes/web');
 app.use('/', webRouter);

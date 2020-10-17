@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const CategorySchema = mongoose.Schema({
     name : String,
     is_active  : String,
+    start_time: String,
+    end_time: String,
     created_at   : String,
     updated_at  : String,
 }, {
