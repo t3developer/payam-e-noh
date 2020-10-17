@@ -43,8 +43,8 @@ app.set('view engine', 'ejs');
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 
-// app.use('/uploads', express.static(__dirname + '/uploads'));
-// app.use(express.static(__dirname +'/public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname +'/public'));
 
 var flash = require('express-flash-messages')
 app.use(flash())
