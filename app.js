@@ -63,6 +63,15 @@ app.use('/', webRouter);
 var apiRouter = require('./routes/api');
 app.use('/api', apiRouter);
 
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
+
 const port = process.env.PORT || 9800;
 var server = app.listen(port, function () {
     console.log("Example app listening at http://127.0.0.1:%s", port);
