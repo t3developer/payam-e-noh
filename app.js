@@ -17,8 +17,11 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-var path=require('path');
-app.use(fileUpload());
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+    createParentPath: true
+}));
 
 global.connectPool = require('./config/db.js');
 
@@ -39,8 +42,8 @@ app.set('view engine', 'ejs');
 //app.set('view engine', 'pug')
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname +'/public'));
-app.use(express.static(__dirname +'/uploads'));
 var flash = require('express-flash-messages')
 app.use(flash())
 
@@ -53,15 +56,9 @@ app.use(function (req, res, next) {
     res.header('Content-Type', 'application/json');
     next();
 });
-app.use(bodyParser.json());
-app.use(express.urlencoded({limit: '100mb',extended: true }));
-
 
 var webRouter = require('./routes/web');
 app.use('/', webRouter);
-// app.get('/', (req, res) => {
-//     res.json({"message": "Welcome to Payam-e-Noh application."});
-// });
 
 var apiRouter = require('./routes/api');
 app.use('/api', apiRouter);

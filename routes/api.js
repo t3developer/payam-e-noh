@@ -18,7 +18,8 @@ router.get('/v1/get-categories', Categories.listapi);
 // router.get('/v1/playCatVideo/:name', Filecontroller.serverFunction);
 
 // TODO: NEED TO UPLOAD FILE USING HTTP REQUEST
-router.post("/v1/upload", upload.single('file'), Filecontroller.upload);
+router.post("/v1/upload", Filecontroller.upload);
+// router.post("/v1/upload", upload.single('file'), Filecontroller.upload); // File uploading with multer
 router.get("/v1/active_videos", Filecontroller.getListFiles);
 router.get("/v1/files/:name", Filecontroller.download);
 
