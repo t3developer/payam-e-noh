@@ -39,15 +39,14 @@ global.CURRENCY = '$';
 
 /* Admin section code */
 app.set('view engine', 'ejs');
-//app.set('view engine', 'pug')
 var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname +'/public'));
 
-var flash = require('express-flash-messages')
-app.use(flash())
+var flash = require('express-flash-messages');
+app.use(flash());
 
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');

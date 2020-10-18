@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import VideoPlaylistComponent from './App';
 import * as serviceWorker from './serviceWorker';
+import {combineReducers, createStore} from "redux";
+import {Provider} from 'react-redux';
+import {reducer as jPlayers} from 'react-jplayer';
+import {reducer as jPlaylists} from 'react-jplaylist';
+import {BrowserRouter as Router, Route} from "react-router-dom";
+
+const store = createStore(combineReducers({ jPlayers, jPlaylists }));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider store={store}>
+        <Router>
+            <div>
+                <Route path="/" exact component={VideoPlaylistComponent} />
+            </div>
+        </Router>
+    </Provider>,
   document.getElementById('root')
 );
 
