@@ -8,6 +8,7 @@ import {Provider} from 'react-redux';
 import {reducer as jPlayers} from 'react-jplayer';
 import {reducer as jPlaylists} from 'react-jplaylist';
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import HomeComponent from "./components/homecomponent";
 
 const store = createStore(combineReducers({ jPlayers, jPlaylists }));
 
@@ -15,7 +16,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div>
-                <Route path="/" exact component={VideoPlaylistComponent} />
+                <Route path="/" exact component={HomeComponent} />
+                <Route path="/player" exact component={VideoPlaylistComponent} />
             </div>
         </Router>
     </Provider>,

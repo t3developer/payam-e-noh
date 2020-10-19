@@ -97,14 +97,14 @@ class VideoPlaylistComponent extends Component{
             </div>
             <Gui>
               <div className="jp-controls jp-icon-controls">
-                <Previous><i className="fa fa-step-backward" /></Previous>
+                {/*<Previous><i className="fa fa-step-backward" /></Previous>*/}
                 <Play><i className="fa">{/* Icon set in css */}</i></Play>
-                <Next><i className="fa fa-step-forward" /></Next>
-                <Repeat>
-                  <i className="fa">{/* Icon set in css */}</i>
-                  <i className="fa fa-repeat" />
-                </Repeat>
-                <Shuffle><i className="fa fa-random" /></Shuffle>
+                {/*<Next><i className="fa fa-step-forward" /></Next>*/}
+                {/*<Repeat>*/}
+                {/*  <i className="fa">/!* Icon set in css *!/</i>*/}
+                {/*  <i className="fa fa-repeat" />*/}
+                {/*</Repeat>*/}
+                {/*<Shuffle><i className="fa fa-random" /></Shuffle>*/}
                 <div className="jp-progress">
                   <SeekBar>
                     <BufferBar />
