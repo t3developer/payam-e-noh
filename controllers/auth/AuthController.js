@@ -35,7 +35,7 @@ const AuthController = module.exports = {
       User.findOne({ email }).then(user => {
         if (!user) {
           //If user not found then send error code
-          errors.error = "User not found";
+          errors.error = "Invalid email or password!";
           return res.status(404).json(errors);
         }
 
@@ -57,7 +57,7 @@ const AuthController = module.exports = {
                   );
               } else {
                   //if password not matched then send error code and message
-                  errors.error = "Wrong Password";
+                  errors.error = "Invalid email or password!";
                   return res.status(400).json(errors);
               }
           }) //'password' is the password typed at login and user.password is the hashed password stored in db
