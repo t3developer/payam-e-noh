@@ -24,6 +24,28 @@
 		<script src="<%=nodeSiteUrl%>/js/jquery.flot.min.js"></script>
 		<script src="<%=nodeSiteUrl%>/js/jquery.flot.pie.min.js"></script>
 		<script src="<%=nodeSiteUrl%>/js/jquery.flot.resize.min.js"></script>  -->
+		<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+		<script>
+                var pusher = new Pusher('0dc130ea51354b36f1ce', { cluster: 'ap2' });
+
+                // retrieve the socket ID once we're connected
+                pusher.connection.bind('connected', function () {
+                    // attach the socket ID to all outgoing Axios requests
+                    axios.defaults.headers.common['X-Socket-Id'] = pusher.connection.socket_id;
+                });
+
+                // request permission to display notifications, if we don't alreay have it
+                Notification.requestPermission();
+                pusher.subscribe('notifications')
+                        .bind('video_add', function (video) {
+                            var notification = new Notification(video.user + " has just added a video in "+ video.category +" category. Check it out.");
+                            notification.onclick = function (event) {
+                                window.location.href = '/admin/Videos/list';
+                                event.preventDefault();
+                                notification.close();
+                            }
+                        });
+            </script>
 	</head>
 
 	<body class="no-skin">
@@ -303,7 +325,7 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<%=nodeSiteUrl%>/images/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="<%=nodeSiteUrl%>/images/avatars/avatar2.png" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 								</span>

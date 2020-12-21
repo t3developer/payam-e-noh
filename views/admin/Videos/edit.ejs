@@ -101,8 +101,9 @@
                                     <div>
                                         <label for="form-field-select-2">Status</label>
                                         <select class="form-control" name="is_active" id="form-field-select-2">
-                                            <option value="1" <%=data.is_active==1 ? 'selected' : '' %>>Active</option>
-                                            <option value="0"  <%=data.is_active==0 ? 'selected' : '' %>>Inactive</option>
+                                            <option value="0"  <%=data.is_active==0 ? 'selected' : '' %>>Pending</option>
+                                            <option value="1" <%=data.is_active==1 ? 'selected' : '' %>>Approved</option>
+                                            <option value="2" <%=data.is_active==2 ? 'selected' : '' %>>Rejected</option>
                                         </select>
                                         <span class="error"><%=errorData.is_active%></span>
                                     </div>  <br>

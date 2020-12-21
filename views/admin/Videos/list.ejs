@@ -17,9 +17,9 @@
                     <div class="col-xs-6">
                             <h1>  <%=controller%> List <small>    </h1>
                     </div>
-                    <!-- <div class="col-xs-6">
-                        <a href="<%=nodeAdminUrl%>/<%=controller%>/add%>"> <button class="btn btn-info pull-right" type="button">   Add   </button></a>
-                    </div> -->
+                    <div class="col-xs-6">
+                        <a href="javascript:window.location.reload(true);"> <button class="btn btn-info pull-right" type="button">   Refresh   </button></a>
+                    </div>
                 </div>
                 <div class="row">
                         <div class="col-xs-12">
@@ -32,11 +32,12 @@
                                         <thead>
                                             <tr>
                                                 <th>S.NO.</th>
-                                                <th>User Id</th>
+                                                <th>User Name</th>
+                                                <th>User Email</th>
                                                 <th>Category Id</th>
-                                                <th>File Name</th>
                                                 <th>File</th>
                                                 <th> <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> Status </th>
+                                                <th> <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> Filter Result </th>
                                                 <th class="hidden-480">Action</th>
 
                                             </tr>
@@ -47,9 +48,9 @@
                                                     for(var i = 0;i < data.length;i++) { %>
                                             <tr>
                                                 <td> <a href="#"><%=i+1%></a>  </td>
-                                                <td style="width: 15%;"><%=data[i].user_id%></td>
-                                                <td style="width: 15%;"><%=data[i].category_id%></td>
-                                                <td style="width: 15%;"><%=data[i].name%></td>
+                                                <td style="width: 10%;text-transform:capitalize"><%=data[i].user_id.name%></td>
+                                                <td style="width: 10%;"><%=data[i].user_id.email%></td>
+                                                <td style="width: 10%;text-transform:capitalize"><%=data[i].category_id.name%></td>
                                                 <td style="width: 30%;">
                                                   <video controls height="200" style="max-width: 100%;margin: 0 auto;width: 100%;">
                                                       <source src="<%=data[i].path%>" type="video/mp4"/>
@@ -58,10 +59,28 @@
                                                   </video>
                                                 </td>
                                                 <td class="hidden-480">
-                                                    <%if(data[i].is_active == 1){  %>
-                                                    <span class="label label-sm label-success">Active</span>
+                                                    <% if(data[i].filter_content_status == 'Pending'){  %>
+                                                        <span class="label label-sm label-warning">Pending</span>
                                                     <% }else{ %>
-                                                        <span class="label label-sm label-warning">Deactivate</span>
+                                                        <span class="label label-sm label-success">Success</span>
+                                                    <%}%>
+
+                                                    <% if(data[i].filter_content_status == 'Success'){  %>
+                                                        <div style="margin-top: 10px;margin-bottom: 10px;"><span style="font-weight:bold; margin-top: 10px;">Results</span></div>
+                                                        <div><span style="width: 80px; display: inline-block;">Weapons: </span><span style="margin-bottom: 5px;" class="label label-sm"><%=data[i].filter_content_result.weapon%></span></div>
+                                                        <div><span style="width: 80px; display: inline-block;">Alcohol: </span><span style="margin-bottom: 5px;" class="label label-sm"><%=data[i].filter_content_result.alcohol%></span></div>
+                                                        <div><span style="width: 80px; display: inline-block;">Drugs: </span><span style="margin-bottom: 5px;" class="label label-sm"><%=data[i].filter_content_result.drugs%></span></div>
+                                                        <div><span style="width: 80px; display: inline-block;">Nudity Raw: </span><span style="margin-bottom: 5px;" class="label label-sm"><%=data[i].filter_content_result.nudity_raw%></span></div>
+                                                        <div><span style="width: 80px; display: inline-block;">Nudity Partial: </span><span style="margin-bottom: 5px;" class="label label-sm"><%=data[i].filter_content_result.nudity_partial%></span></div>
+                                                    <% } %>
+                                                </td>
+                                                <td class="hidden-480">
+                                                    <% if(data[i].is_active == 1){  %>
+                                                    <span class="label label-sm label-success">Approved</span>
+                                                    <% }else if(data[i].is_active == 2){  %>
+                                                        <span class="label label-sm label-danger">Rejected</span>
+                                                    <% }else{ %>
+                                                        <span class="label label-sm label-warning">Pending</span>
                                                     <%}%>
                                                 </td>
                                                 <td class="hidden-480">
@@ -73,7 +92,7 @@
                                                 </td>
                                             </tr>
                                             <% }  }else{ %>
-                                                <tr>  <td colspan="5">No record found</td>  </tr>
+                                                <tr>  <td colspan="8">No record found</td>  </tr>
                                         <% } %>
                                         </tbody>
                                     </table>

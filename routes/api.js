@@ -22,6 +22,8 @@ router.post("/v1/upload", Filecontroller.upload);
 // router.post("/v1/upload", upload.single('file'), Filecontroller.upload); // File uploading with multer
 router.get("/v1/active_videos", Filecontroller.getListFiles);
 router.get("/v1/files/:name", Filecontroller.download);
+router.post("/v1/filter-video-result", Filecontroller.setVideoContentResult);
+router.get("/v1/user_videos", Filecontroller.getUserVideos);
 
 
 module.exports = router;

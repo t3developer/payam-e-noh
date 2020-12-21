@@ -18,8 +18,11 @@ async function list(req, res) {
     res.set('content-type' , 'text/html; charset=mycharset');
     data = {};
     action = 'list';
-    //const allRecord = await Users.findAll();
-    const allRecord = await Videos.find({});
+    const allRecord = await Videos.find({})
+        .populate('user_id')
+        .populate('category_id')
+        .sort({ createdAt: -1 })
+        .exec();
     res.render('admin/Videos/list',{
         page_title:" List",
         data:allRecord,
