@@ -3,9 +3,6 @@ const SIGHTENGINE_API_SECRET = 'FiaM2QYGF9rKTSbmmviR';
 
 const Videos = require('../models/Videos');
 const Categories = require('../models/Categories');
-const http = require('http'),
-    fs = require('fs'),
-    util = require('util');
 const sightengine = require('sightengine')(SIGHTENGINE_API_USER, SIGHTENGINE_API_SECRET);
 const pusher = require('../config/pusher');
 

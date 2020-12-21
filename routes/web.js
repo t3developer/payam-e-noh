@@ -3,6 +3,7 @@ var router = express.Router();
 var AdminController    =  require('../controllers/admin/AdminController');
 var UsersController    =  require('../controllers/admin/UsersController');
 var VideosController   =  require('../controllers/admin/VideosController');
+var ArticlesController   =  require('../controllers/admin/ArticlesController');
 var CategoryController =  require('../controllers/admin/CategoriesController');
 var Home               = require('../controllers/HomeController');
 
@@ -30,6 +31,12 @@ router.get('/admin/Videos/list',requiredAuthentication,  VideosController.list);
 router.get('/admin/Videos/edit/:id', requiredAuthentication, VideosController.edit);
 router.post('/admin/Videos/edit/:id',requiredAuthentication,  VideosController.edit);
 router.get('/admin/Videos/delete/:id', requiredAuthentication, VideosController.deleteRecord);
+
+/** Routes for user articles module  */
+router.get('/admin/Articles/list', requiredAuthentication,  ArticlesController.list);
+router.get('/admin/Articles/edit/:id', requiredAuthentication, ArticlesController.edit);
+router.post('/admin/Articles/edit/:id',requiredAuthentication,  ArticlesController.edit);
+router.get('/admin/Articles/delete/:id', requiredAuthentication, ArticlesController.deleteRecord);
 
 /** Routes for Categories module  */
 router.get('/admin/Categories/list',requiredAuthentication,  CategoryController.list);

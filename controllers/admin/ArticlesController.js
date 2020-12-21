@@ -1,8 +1,7 @@
 var Request = require("request");
-//var Categories = require.main.require('./models/Categories');
-var Videos = require.main.require('./models/Videos');
-const controller = 'Videos';
-const module_name = 'Videos';
+var Articles = require.main.require('./models/Articles');
+const controller = 'Articles';
+const module_name = 'Articles';
 
 
 /**
@@ -18,12 +17,12 @@ async function list(req, res) {
     res.set('content-type' , 'text/html; charset=mycharset');
     data = {};
     action = 'list';
-    const allRecord = await Videos.find({})
+    const allRecord = await Articles.find({})
         .populate('user_id')
         .populate('category_id')
         .sort({ createdAt: -1 })
         .exec();
-    res.render('admin/Videos/list',{
+    res.render('admin/Articles/list',{
         page_title:" List",
         data:allRecord,
         controller:controller,
@@ -34,7 +33,7 @@ async function list(req, res) {
 exports.list = list;
 
 /**
- *  list latest
+ *  list
  *  Purpose: This function is used to show listing of all videos
  *  Pre-condition:  None
  *  Post-condition: None.
@@ -42,7 +41,7 @@ exports.list = list;
  *  Returns: json
  */
 async function listLatest() {
-    const allRecord = await Videos.find().sort({ createdAt: -1 }).limit(4)
+    const allRecord = await Articles.find().sort({ createdAt: -1 }).limit(4)
         .populate('user_id')
         .populate('category_id')
         .sort({ createdAt: -1 })
@@ -68,7 +67,7 @@ async function edit(req, res) {
     var errorData = {};
     if(req.params.id){
         var id =  req.params.id;
-        const entityDetail = await Videos.findById({_id:id});
+        const entityDetail = await Articles.findById({_id:id});
         if(entityDetail == 0){
             req.flash('error', 'Invalid url')
             return res.redirect(nodeAdminUrl+'/Videos/list');
@@ -76,7 +75,6 @@ async function edit(req, res) {
         if (req.method == "POST") {
             var input = JSON.parse(JSON.stringify(req.body));
 
-            console.log(req); console.log('Here');
             req.checkBody('is_active', 'Status is required').notEmpty();
             var errors = req.validationErrors();
             if(errors){
@@ -89,9 +87,8 @@ async function edit(req, res) {
                     });
                 }
             }else{
-                var saveResult = '';
                 var msg =  controller+' updated successfully.';
-                var saveResult = await Videos.findByIdAndUpdate(req.params.id, {$set: input});
+                var saveResult = await Articles.findByIdAndUpdate(req.params.id, {$set: input});
                 req.flash('success', msg)
                 res.locals.message = req.flash();
                 if(saveResult){
@@ -128,7 +125,7 @@ async function deleteRecord(req, res) {
 
     var categoryDetail = {};
     if(req.params.id){
-        categoryDetail = await Videos.findByIdAndRemove(req.params.id);
+        categoryDetail = await Articles.findByIdAndRemove(req.params.id);
         if(categoryDetail){
             req.flash('error', 'Invalid url')
             return res.redirect(nodeAdminUrl+'/'+controller+'/list');

@@ -1,10 +1,12 @@
-var Request = require("request");  
+var Request = require("request");
 var Users = require.main.require('./models/Users');         
 const controller = 'admin';
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
+var ArticlesController = require('./ArticlesController');
+var VideosController = require('./VideosController');
    
 /** 
 	 *  login
@@ -94,8 +96,14 @@ exports.login = login;
 async function dashboard(req, res) {  
 
     var action = 'login';
-    res.set('content-type' , 'text/html; charset=mycharset'); 
-    data = {}; LoginUser = {};errorData = {};
+    res.set('content-type' , 'text/html; charset=mycharset');
+    const latestArticles = await ArticlesController.listLatest();
+    const latestVideos = await VideosController.listLatest();
+
+    data = {
+        articles: latestArticles,
+        videos: latestVideos
+    }; LoginUser = {};errorData = {};
     res.render('admin/dashboard',{page_title:"Admin - Dashboard",data:data,LoginUser:LoginUser,controller:controller,action:action});   
     
 };  
@@ -246,4 +254,3 @@ async function submitReview(req, res) {
     return false;  
 }; 
 exports.submitReview = submitReview;   
-  
