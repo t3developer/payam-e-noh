@@ -44,7 +44,6 @@ async function listLatest() {
     const allRecord = await Articles.find().sort({ createdAt: -1 }).limit(4)
         .populate('user_id')
         .populate('category_id')
-        .sort({ createdAt: -1 })
         .exec();
 
     return allRecord;

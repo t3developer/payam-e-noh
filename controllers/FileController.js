@@ -5,6 +5,7 @@ const Videos = require('../models/Videos');
 const Categories = require('../models/Categories');
 const sightengine = require('sightengine')(SIGHTENGINE_API_USER, SIGHTENGINE_API_SECRET);
 const pusher = require('../config/pusher');
+const moment = require('moment');
 
 const VIDEO_UPLOAD_DIR = "/uploads/videos/";
 const VIDEO_UPLOAD_BASE_URL = __basedir + VIDEO_UPLOAD_DIR;
@@ -166,10 +167,12 @@ const setVideoContentResult = async (req, res) => {
 
 const getUserVideos = async (req, res) => {
   try {
-    console.log(req.query.user_id);
     const allRecords =  await Videos.find({
       user_id: JSON.parse(req.query.user_id),
-    }).sort({ createdAt: -1 }).exec();
+    }).populate('user_id')
+        .populate('category_id')
+        .sort({ createdAt: -1 })
+        .exec();
     res.status(200).send(allRecords);
   } catch (err) {
     res.status(400).send({
@@ -178,106 +181,45 @@ const getUserVideos = async (req, res) => {
   }
 };
 
-// File uploading with multer
-// const upload = async (req, res) => {
-//     try {
-//       console.log(req.file);
-//
-//       if (req.file === undefined) {
-//         return res.status(400).send({
-//           error: "Please upload a file!"
-//         });
-//       }
-//
-//       let video = {};
-//       video.name = req.file.filename;
-//       video.user_id = req.body.user_id;
-//       video.category_id = req.body.category_id;
-//       video.path = req.file.path;
-//       video.is_active  = 0;
-//       const videoRecord = new Videos(video);
-//       const saveResult = await videoRecord.save();
-//
-//       if (saveResult) {
-//         res.status(200).send({
-//           success: "Uploaded the file successfully: " + saveResult,
-//         });
-//       } else {
-//         res.send(400).send({
-//           error: "File uploading failed. Server error!"
-//         });
-//       }
-//
-//     }catch(err) {
-//       res.send(400).send({
-//         error: "File uploading failed. Server error!"
-//       });
-//     }
-// };
+const getCategoryVideos = async (req, res) => {
+  try {
+    const category = await Categories.findOne({
+      name: JSON.parse(req.query.category)
+    });
+    const allRecords =  await Videos.find({
+      category_id: category._id ? category._id : null,
+    }).populate('user_id')
+        .populate('category_id')
+        .sort({ createdAt: -1 })
+        .exec();
+    res.status(200).send(allRecords);
+  } catch (err) {
+    res.status(400).send({
+      error: "Couldn't get videos. Server error!"
+    });
+  }
+};
 
-async function getListFiles  (req, res) {
-  // const directoryPath = __basedir + "/uploads/videos/";
-  let date = new Date();
-  let currentHours = date.getHours();
-  currentHours = ("0" + currentHours).slice(-2);
-  let currentMins = date.getMinutes();
-  currentMins = ("0" + currentMins).slice(-2);
-  let start_time = currentHours + ':' + currentMins;
-  let end_time_hours = (parseInt(currentHours) + parseInt(6));
-  let end_time = ("0" + end_time_hours).slice(-2) + ':' + currentMins;
-  console.log(start_time);
-  console.log(end_time);
-  const cats = await Categories.aggregate([
-    {
-      $match: {
-          start_time: {
-            $gte: start_time
-          },
-          end_time: {
-            $lt: end_time
-          },
-      }
-    }
-  ]);
-  console.log(cats[0]._id);
+async function getCurrentVideos  (req, res) {
+  let clientNow = req.query.now;
+  let clientDateTime = new Date(Date.parse(clientNow));
+  let clientTime = moment(clientDateTime).format("HH:MM");
+
+  const categories = await Categories.find({
+        "start_time": {
+          "$lt": clientTime.toString()
+        },
+        "end_time": {
+          "$gte": clientTime.toString()
+        },
+      });
+
   const allRecord =  await Videos.find({
     is_active: 1,
-    category_id : cats[0]._id
+    category_id : categories[0] ? categories[0]._id : null
   });
-  res.status(200).send(allRecord);
-}
 
-var serverFunction = function (req, res) {
-  // var path = req.params.name;
-  // var stat = fs.statSync(path);
-  // var total = stat.size;
-  // if (req.headers['range']) {
-  //   var range = req.headers.range;
-  //   var parts = range.replace(/bytes=/, "").split("-");
-  //   var partialstart = parts[0];
-  //   var partialend = parts[1];
-  //
-  //   var start = parseInt(partialstart, 10);
-  //   var end = partialend ? parseInt(partialend, 10) : total-1;
-  //   var chunksize = (end-start)+1;
-  //   console.log('RANGE: ' + start + ' - ' + end + ' = ' + chunksize);
-  //
-  //   var file = fs.createReadStream(path, {start: start, end: end});
-  //   res.writeHead(206, {
-  //       'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
-  //       'Accept-Ranges': 'bytes',
-  //       'Content-Length': chunksize,
-  //       'Content-Type': 'video/mp4'
-  //   });
-  //   file.pipe(res);
-  // } else {
-  //   console.log('ALL: ' + total);
-  //   res.writeHead(200, {
-  //       'Content-Length': total,
-  //       'Content-Type': 'video/mp4'
-  //   });
-  //   fs.createReadStream(path).pipe(res);
-  // }
+  res.status(200).send(allRecord);
 }
 
 const download = (req, res) => {
@@ -295,8 +237,9 @@ const download = (req, res) => {
 
 module.exports = {
   upload,
-  getListFiles,
+  getCurrentVideos,
   download,
   setVideoContentResult,
-  getUserVideos
+  getUserVideos,
+  getCategoryVideos
 };

@@ -1,6 +1,7 @@
 
 const Articles = require('../models/Articles');
 const pusher = require('../config/pusher');
+const Categories = require('../models/Categories');
 
 const IMAGE_UPLOAD_DIR = "/uploads/images/";
 const IMAGE_UPLOAD_BASE_URL = __basedir + IMAGE_UPLOAD_DIR;
@@ -63,7 +64,70 @@ const getUserArticles = async (req, res) => {
     try {
         const allRecords =  await Articles.find({
             user_id: JSON.parse(req.query.user_id),
-        }).sort({ createdAt: -1 }).exec();
+        }).populate('user_id')
+            .populate('category_id')
+            .sort({ createdAt: -1 })
+            .exec();
+        res.status(200).send(allRecords);
+    } catch (err) {
+        res.status(400).send({
+            error: "Couldn't get articles. Server error!"
+        });
+    }
+};
+
+const getCateogryArticles = async (req, res) => {
+    try {
+        const category = await Categories.findOne({
+            name: JSON.parse(req.query.category)
+        });
+        const allRecords =  await Articles.find({
+            category_id: category._id ? category._id : null,
+        }).populate('user_id')
+            .populate('category_id')
+            .sort({ createdAt: -1 })
+            .exec();
+        res.status(200).send(allRecords);
+    } catch (err) {
+        res.status(400).send({
+            error: "Couldn't get articles. Server error!"
+        });
+    }
+};
+
+const getCurrentArticles = async (req, res) => {
+    let clientNow = req.query.now;
+    let clientDateTime = new Date(Date.parse(clientNow));
+    let clientTime = moment(clientDateTime).format("HH:MM");
+
+    const categories = await Categories.find({
+        "start_time": {
+            "$lt": clientTime.toString()
+        },
+        "end_time": {
+            "$gte": clientTime.toString()
+        },
+    });
+
+    console.log(clientNow, clientTime, categories);
+
+    const allRecord =  await Articles.find({
+        is_active: 1,
+        category_id : categories[0] ? categories[0]._id : null
+    }).populate('user_id')
+        .populate('category_id')
+        .sort({ createdAt: -1 })
+        .exec();
+
+    res.status(200).send(allRecord);
+};
+
+const getLatestArticles = async (req, res) => {
+    try {
+        const allRecords =  await Articles.find().sort({ createdAt: -1 }).limit(5)
+            .populate('user_id')
+            .populate('category_id')
+            .exec();
         res.status(200).send(allRecords);
     } catch (err) {
         res.status(400).send({
@@ -74,5 +138,8 @@ const getUserArticles = async (req, res) => {
 
 module.exports = {
     add,
-    getUserArticles
+    getUserArticles,
+    getCurrentArticles,
+    getLatestArticles,
+    getCateogryArticles
 };

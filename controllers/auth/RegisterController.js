@@ -80,5 +80,19 @@ const RegisterController = module.exports = {
           });
         }
       });
-    }
+    },
+
+  /**
+   * Registration
+   * @param req
+   * @param res
+   */
+  update: async (req, res) => {
+     const user = await User.updateOne({
+          name: req.body.name,
+          email: req.body.email,
+          contact_number : req.body.phone,
+        });
+      return res.status(200).json(user);
+  }
 };

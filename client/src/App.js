@@ -68,9 +68,9 @@ class VideoPlaylistComponent extends Component{
   }
 
   fetchPlaylist = async () => {
-    const response = await fetch('/api/v1/active_videos');
+    const now = new Date().toString();
+    const response = await fetch(`/api/v1/active_videos?now=${encodeURIComponent(now)}`);
     const responsePlaylist = await response.json()
-    console.log(responsePlaylist);
     let playlist = [];
 
     if (responsePlaylist.length) {

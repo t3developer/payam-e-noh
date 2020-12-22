@@ -5,6 +5,7 @@ var UsersController    =  require('../controllers/admin/UsersController');
 var VideosController   =  require('../controllers/admin/VideosController');
 var ArticlesController   =  require('../controllers/admin/ArticlesController');
 var CategoryController =  require('../controllers/admin/CategoriesController');
+var FeedbacksController =  require('../controllers/admin/FeedbacksController');
 var Home               = require('../controllers/HomeController');
 
 /** Routes for Home-React APP */
@@ -45,6 +46,8 @@ router.post('/admin/Categories/edit/:id',requiredAuthentication,  CategoryContro
 router.post('/admin/Categories/add',requiredAuthentication, CategoryController.add);
 router.get('/admin/Categories/add', requiredAuthentication, CategoryController.add);
 router.get('/admin/Categories/delete/:id', requiredAuthentication, CategoryController.deleteRecord);
+
+router.get('/admin/Feedbacks/list',requiredAuthentication,  FeedbacksController.list);
 
 module.exports = router;
 

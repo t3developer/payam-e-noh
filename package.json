@@ -18,7 +18,7 @@
     "express-validator": "^5.3.1",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.5.13",
     "multer": "^1.4.2",
     "nodemon": "^2.0.4",
@@ -34,7 +34,7 @@
     "concurrently": "^5.3.0"
   },
   "scripts": {
-    "client": "cd client && npm start",
+    "client": "cd client-new && npm start",
     "server": "nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node app.js",
@@ -43,6 +43,6 @@
   "keywords": [
     "node-admin"
   ],
-  "author": "Dawood Siddiq <dawood@bluestreamz.com>",
+  "author": "Usman Qureshi <usman.qureshi@drsmile.de>",
   "license": "ISC"
 }

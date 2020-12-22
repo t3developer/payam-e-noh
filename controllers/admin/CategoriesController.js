@@ -127,7 +127,7 @@ async function add(req, res) {
             data = input;
         }else{
             const SaveData = new Categories(input);
-            var saveResult=   await SaveData.save();
+            const saveResult = await SaveData.save();
             if(saveResult){
                 req.flash('success', controller+' added successfully.')
                 res.locals.message = req.flash();
