@@ -68,7 +68,7 @@ const upload = async (req, res) => {
 };
 
 const filterVideoContent = (video) => {
-  sightengine.check(['nudity','wad']).video_sync("https://6b971e391f58.ngrok.io"+video.path).then(async function(result) {
+  sightengine.check(['nudity','wad']).video_sync("https://payam-e-nou.herokuapp.com"+video.path).then(async function(result) {
     if (result.status === "success") {
       const videoFinalScore = await calculateVideoScore(result);
 
