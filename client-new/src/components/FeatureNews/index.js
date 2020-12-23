@@ -63,14 +63,14 @@ const FeatureNews = ({className, data}) => {
                                     {data.map((item, i) => (
                                         <div key={i} className="single_post post_type6 post_type7">
                                             <div className="post_img gradient1">
-                                                <Link to="/"><img src={item.image} alt="thumb"/></Link>
+                                                <Link to={{ pathname: '/dark/post3', state: { item: item} }}><img src={item.image} alt="thumb"/></Link>
                                             </div>
                                             <div className="single_post_text">
-                                                <div className="meta5"><Link to="/">{item.category_id.name}</Link>
-                                                    <Link to="/">{item.submitDate}</Link>
+                                                <div className="meta5"><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.category_id.name}</Link>
+                                                    <Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.submitDate}</Link>
                                                 </div>
                                                 <h4>
-                                                    <Link to="/post1">{item.title}</Link>
+                                                    <Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.title}</Link>
                                                 </h4>
                                             </div>
                                         </div>

@@ -37,8 +37,8 @@ const FooterArea = ({className}) => {
                         </div>
                         <div className="col-md-6 col-lg-4 offset-lg-2 align-self-center">
                             <div className="signup_form">
-                                <button className="download-btn">Sign Up</button>
-                                <p>Let's share with others!</p>
+                                <a href="https://drive.google.com/file/d/1EfHdTQjReUWE7d-DnSK0nzO5RazxC9_t/view" className="download-btn" download>Want to get registered?</a>
+                                <p>Click on button above and download the app Payam e Nou from the provided link and get yourself registered to feature your content.</p>
                             </div>
                         </div>
                     </div>

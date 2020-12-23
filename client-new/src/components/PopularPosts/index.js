@@ -96,15 +96,15 @@ const PopularPosts = ({data}) => {
                             <div key={i} className="single_post type10 widgets_small mb15">
                                 <div className="post_img">
                                     <div className="img_wrap">
-                                        <Link to="/">
+                                        <Link to={{ pathname: '/dark/post3', state: { item: item} }}>
                                             <img src={item.image} alt="thubm"/>
                                         </Link>
                                     </div>
                                     <span className="tranding tranding_border">{i+1}</span>
                                 </div>
                                 <div className="single_post_text">
-                                    <h4><Link to="/post1">{item.title}</Link></h4>
-                                    <div className="meta4"><Link to="/">{item.category_id.name}</Link>
+                                    <h4><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.title}</Link></h4>
+                                    <div className="meta4"><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.category_id.name}</Link>
                                     </div>
                                 </div>
                             </div>

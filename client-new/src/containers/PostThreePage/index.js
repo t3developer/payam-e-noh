@@ -298,29 +298,29 @@ const PostThreePage = () => {
                                 </div>
                             </div>
                             <div className="space-30"/>
-                            <PostOnePagination className="next_prv_single padding20 shadow6 next_prv_single3"/>
+                            {/*<PostOnePagination className="next_prv_single padding20 shadow6 next_prv_single3"/>*/}
                         </div>
                         <div className="col-md-6 col-lg-4">
-                            <WidgetTab/>
-                            <FollowUs title="Follow Us"/>
-                            <WidgetTrendingNews/>
-                            <div className="banner2 mb30">
-                                <Link to="/">
-                                    <img src={banner2} alt="thumb"/>
-                                </Link>
-                            </div>
-                            <MostShareWidget title="Most Share"/>
-                            <NewsLetter/>
+                            {/*<WidgetTab/>*/}
+                            {/*<FollowUs title="Follow Us"/>*/}
+                            {/*<WidgetTrendingNews/>*/}
+                            {/*<div className="banner2 mb30">*/}
+                            {/*    <Link to="/">*/}
+                            {/*        <img src={banner2} alt="thumb"/>*/}
+                            {/*    </Link>*/}
+                            {/*</div>*/}
+                            {/*<MostShareWidget title="Most Share"/>*/}
+                            {/*<NewsLetter/>*/}
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="space-60"/>
-            <OurBlogSection/>
-            <div className="space-60"/>
-            <BlogComment/>
-            <div className="space-100"/>
-            <BannerSection/>
+            {/*<div className="space-60"/>*/}
+            {/*<OurBlogSection/>*/}
+            {/*<div className="space-60"/>*/}
+            {/*<BlogComment/>*/}
+            {/*<div className="space-100"/>*/}
+            {/*<BannerSection/>*/}
         </Fragment>
     )
 };

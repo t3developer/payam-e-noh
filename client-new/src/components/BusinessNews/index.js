@@ -22,20 +22,20 @@ const BusinessNews = ({businessNews, headerHide}) => {
                                 <div key={i} className="single_post post_type3 post_type12 mb30">
                                     <div className="post_img">
                                         <div className="img_wrap">
-                                            <Link to="/">
+                                            <Link to={{ pathname: '/dark/post3', state: { item: item} }}>
                                                 <img src={item.image} alt="thumb"/>
                                             </Link>
                                         </div>
                                     </div>
                                     <div className="single_post_text">
-                                        <div className="meta3"><Link to="/">{item.user_id.name}</Link>
-                                            <Link to="#">{item.submitDate}</Link>
+                                        <div className="meta3"><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.user_id.name}</Link>
+                                            <Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.submitDate}</Link>
                                         </div>
-                                        <h4><Link to="/post1">{item.title}</Link></h4>
+                                        <h4><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.title}</Link></h4>
                                         <div className="space-10"/>
                                         <p className="post-p">{item.sub_title}</p>
                                         <div className="space-20"/>
-                                        <Link to="/" className="readmore">Read more</Link>
+                                        <Link to={{ pathname: '/dark/post3', state: { item: item} }} className="readmore">Read more</Link>
                                     </div>
                                 </div>
                             ))}

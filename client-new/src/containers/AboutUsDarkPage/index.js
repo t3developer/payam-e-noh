@@ -45,9 +45,20 @@ const AboutUsDarkPage = () => {
                                         <li>Since: Dec 23, 2020</li>
                                     </ul>
                                 </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p className="lead">Journalism/media is a wide growing industry all over the world. Payam-e-Nou is digital TV and a journalism website and a smartphone application which is supporting journalists to feature their content.</p>
                                 <br/>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                                <h3 className="subhead">What We Do</h3>
+                                <p className="lead">We have created this platfrom not only for news but other content as well.</p>
+                                <br/>
+                                <h3 className="subhead">What Are We</h3>
+                                <p className="lead">
+                                    Through app you will be able to register yourself as citizen journalists where you will have options to upload your content on the server which will be displayed on our website.
+                                </p>
+                                <br/>
+                                <h3>Digital TV</h3>
+                                <p className="lead">
+                                    The digital tv will run twenty four hours. As our system is theme based, so programs from different categories will be streamed daily. You can check the time slot of your favourite category on the top of the page in "Categories" section.
+                                </p>
                             </div>
                         </div>
                     </div>

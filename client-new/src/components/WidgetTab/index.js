@@ -12,16 +12,16 @@ const WidgetTabPane = ({arr, a_id, id, dark}) => {
                         <div className="single_post widgets_small">
                             <div className="post_img">
                                 <div className="img_wrap">
-                                    <Link to="/">
+                                    <Link to={{ pathname: '/dark/post3', state: { item: item} }}>
                                         <img src={item.image} alt="thumb"/>
                                     </Link>
                                 </div>
                             </div>
                             <div className="single_post_text">
                                 <div className="meta2 meta_separator1"><Link to="#">{item.category_id.name}</Link>
-                                    <Link to="#">{item.submitDate}</Link>
+                                    <Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.submitDate}</Link>
                                 </div>
-                                <h4><Link to="/post1">{item.title}</Link></h4>
+                                <h4><Link to={{ pathname: '/dark/post3', state: { item: item} }}>{item.title}</Link></h4>
                             </div>
                         </div>
                         <div className="space-15"/>
