@@ -201,8 +201,8 @@ const getCategoryVideos = async (req, res) => {
 };
 
 async function getCurrentVideos  (req, res) {
-  let clientNow = req.query.now;
-  let clientDateTime = new Date(Date.parse(clientNow));
+  let clientNow = JSON.parse(req.query.now);
+  let clientDateTime = new Date(clientNow);
   let currentHours = String(clientDateTime.getHours()).padStart(2, '0');
   let currentMinutes = String(clientDateTime.getMinutes()).padStart(2, '0');
   let clientTime = `${currentHours}:${currentMinutes}`;

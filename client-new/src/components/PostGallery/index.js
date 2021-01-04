@@ -112,7 +112,7 @@ class PostGallery extends Component {
     }
 
     fetchPlaylist = async () => {
-        const now = new Date().toString();
+        const now = JSON.stringify(new Date());
         const response = await fetch(`/api/v1/active_videos?now=${encodeURIComponent(now)}`);
         const responsePlaylist = await response.json()
         let playlist = [];
@@ -132,7 +132,7 @@ class PostGallery extends Component {
     }
 
     fetchRelatedArticles = async () => {
-        const now = new Date().toString();
+        const now = JSON.stringify(new Date());
         const response = await fetch(`/api/v1/active_articles?now=${encodeURIComponent(now)}`);
         return await response.json();
     }
