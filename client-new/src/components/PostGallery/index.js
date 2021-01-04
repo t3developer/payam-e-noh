@@ -112,8 +112,12 @@ class PostGallery extends Component {
     }
 
     fetchPlaylist = async () => {
-        const now = JSON.stringify(new Date());
-        const response = await fetch(`/api/v1/active_videos?now=${encodeURIComponent(now)}`);
+        const now = new Date();
+        let currentHours = String(now.getHours()).padStart(2, '0');
+        let currentMinutes = String(now.getMinutes()).padStart(2, '0');
+        let clientTime = `${currentHours}:${currentMinutes}`;
+        console.log('current now', clientTime);
+        const response = await fetch(`/api/v1/active_videos?now=${encodeURIComponent(JSON.stringify(clientTime))}`);
         const responsePlaylist = await response.json()
         let playlist = [];
 
@@ -132,8 +136,12 @@ class PostGallery extends Component {
     }
 
     fetchRelatedArticles = async () => {
-        const now = JSON.stringify(new Date());
-        const response = await fetch(`/api/v1/active_articles?now=${encodeURIComponent(now)}`);
+        const now = new Date();
+        let currentHours = String(now.getHours()).padStart(2, '0');
+        let currentMinutes = String(now.getMinutes()).padStart(2, '0');
+        let clientTime = `${currentHours}:${currentMinutes}`;
+        console.log('current now', clientTime);
+        const response = await fetch(`/api/v1/active_articles?now=${encodeURIComponent(JSON.stringify(clientTime))}`);
         return await response.json();
     }
 

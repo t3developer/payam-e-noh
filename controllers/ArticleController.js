@@ -96,11 +96,11 @@ const getCateogryArticles = async (req, res) => {
 };
 
 const getCurrentArticles = async (req, res) => {
-    let clientNow = JSON.parse(req.query.now);
-    let clientDateTime = new Date(clientNow);
-    let currentHours = String(clientDateTime.getHours()).padStart(2, '0');
-    let currentMinutes = String(clientDateTime.getMinutes()).padStart(2, '0');
-    let clientTime = `${currentHours}:${currentMinutes}`;
+    let clientTime = JSON.parse(req.query.now);
+    // let clientDateTime = new Date(clientNow);
+    // let currentHours = String(clientDateTime.getHours()).padStart(2, '0');
+    // let currentMinutes = String(clientDateTime.getMinutes()).padStart(2, '0');
+    // let clientTime = `${currentHours}:${currentMinutes}`;
 
     const categories = await Categories.find({
         "start_time": {

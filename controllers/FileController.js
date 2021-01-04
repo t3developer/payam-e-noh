@@ -201,11 +201,11 @@ const getCategoryVideos = async (req, res) => {
 };
 
 async function getCurrentVideos  (req, res) {
-  let clientNow = JSON.parse(req.query.now);
-  let clientDateTime = new Date(clientNow);
-  let currentHours = String(clientDateTime.getHours()).padStart(2, '0');
-  let currentMinutes = String(clientDateTime.getMinutes()).padStart(2, '0');
-  let clientTime = `${currentHours}:${currentMinutes}`;
+  let clientTime = JSON.parse(req.query.now);
+  // let clientDateTime = new Date(clientNow);
+  // let currentHours = String(clientDateTime.getHours()).padStart(2, '0');
+  // let currentMinutes = String(clientDateTime.getMinutes()).padStart(2, '0');
+  // let clientTime = `${currentHours}:${currentMinutes}`;
 
   const categories = await Categories.find({
         "start_time": {
@@ -216,7 +216,7 @@ async function getCurrentVideos  (req, res) {
         },
       });
 
-  console.log(clientNow, clientTime, categories[0]);
+  console.log(clientTime, categories[0]);
 
   const allRecord =  await Videos.find({
     is_active: 1,
